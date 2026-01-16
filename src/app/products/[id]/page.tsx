@@ -14,7 +14,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     <div className="max-w-6xl mx-auto">
       {isLoading && <ProductDetailSkeleton />}
       {!isLoading && product && <ProductDetail product={product} />}
-      {!isLoading && product && <ItemNotFound message="Product Not Found" />}
+      {!isLoading && !product && <ItemNotFound message="Product Not Found" />}
     </div>
   )
 }
