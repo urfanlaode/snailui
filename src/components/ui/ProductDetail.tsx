@@ -1,3 +1,5 @@
+'use client'
+
 import { Product } from '@/features/products/types'
 import { Shield, Star, Truck, Undo } from 'lucide-react'
 import Image from 'next/image'
