@@ -2,7 +2,7 @@
 
 import { Product } from '@/features/products/types'
 import { Shield, Star, Truck, Undo } from 'lucide-react'
-import Image from 'next/image'
+import ProductCarousel from './ProductCarousel'
 
 interface ProductDetailProps {
   product: Product
@@ -12,16 +12,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white rounded-xl shadow-sm p-6 flex items-center justify-center">
-          <Image
-            src={product.images[0]}
-            alt={product.title}
-            width={400}
-            height={400}
-            className="object-contain rounded"
-            priority
-          />
-        </div>
+        <ProductCarousel title={product.title} images={product.images} />
         <div>
           <div className="flex items-center gap-2 mb-2">
             <span className="bg-gray-100 text-xs font-bold px-2 py-1 rounded uppercase">{product.category}</span>
@@ -29,14 +20,12 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </div>
           <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-yellow-500 flex gap-2">
-              <div className="flex">
-                {Array.from({ length: Math.round(product.rating) }).map((_, i) => (
-                  <Star key={i} className="h-5" />
-                ))}
-              </div>
-              <span className="text-muted">({product.rating} reviews)</span>
-            </span>
+            <div className="flex">
+              {Array.from({ length: Math.round(product.rating) }).map((_, i) => (
+                <Star key={i} className="text-yellow-500 fill-yellow-500 h-5" />
+              ))}
+            </div>
+            <span className="text-muted">({product.rating} reviews)</span>
           </div>
           <div className="flex items-center gap-2 mb-2">
             <span className="text-2xl font-bold">
@@ -92,7 +81,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               <div key={idx} className="bg-gray-50 rounded p-4">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="font-semibold">{review.reviewerName}</span>
-                  <span className="text-yellow-500">{'★'.repeat(review.rating)}</span>
+                  <div className="flex gap-0">
+                    {Array.from({ length: review.rating }).map((_, i) => (
+                      <Star key={i} className="fill-yellow-500 text-yellow-500 h-3 w-3" />
+                    ))}
+                  </div>
                   <span className="text-xs text-muted">{new Date(review.date).toLocaleDateString()}</span>
                 </div>
                 <p className="text-sm">{review.comment}</p>
