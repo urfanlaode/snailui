@@ -1,15 +1,17 @@
 'use client'
 
-import ItemNotFound from '@/components/ui/ItemNotFound'
-import ProductCard from '@/components/ui/ProductCard'
-import ProductCardSkeleton from '@/components/ui/ProductCard.skeleton'
-import ProductHeader from '@/components/ui/ProductHeader'
+import ItemNotFound from '@/components/ItemNotFound'
+import ProductCard from '@/components/ProductCard'
+import ProductCardSkeleton from '@/components/ProductCard.skeleton'
+import ProductFilter from '@/components/ProductFilter'
 import { useCategories, useInfiniteProducts } from '@/features/products/hooks'
+import { SortOrder } from '@/types'
+import { LoaderCircle } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
 export default function ProductsPage() {
   const [category, setCategory] = useState<string>('')
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+  const [sortOrder, setSortOrder] = useState<SortOrder | undefined>(undefined)
 
   const { data: categories = [] } = useCategories()
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteProducts(category, sortOrder)
@@ -36,9 +38,9 @@ export default function ProductsPage() {
   }, [hasNextPage, isFetchingNextPage, fetchNextPage])
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <header className="mb-8">
-        <ProductHeader
+    <div className="max-w-6xl mx-auto px-2 sm:px-4">
+      <header className="mb-4 sm:mb-8">
+        <ProductFilter
           total={Number(total)}
           categories={categories}
           category={category}
@@ -47,9 +49,9 @@ export default function ProductsPage() {
           onChangeSortOrder={setSortOrder}
         />
       </header>
-      <hr className="mb-6" />
+      <hr className="mb-4 sm:mb-6" />
       {isLoading && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {Array.from({ length: 9 }).map((_, i) => (
             <ProductCardSkeleton key={i} />
           ))}
@@ -57,13 +59,17 @@ export default function ProductsPage() {
       )}
       {!isLoading && allProducts.length > 0 && (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {allProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
           <div ref={sentinelRef} className="h-10" />
-          {isFetchingNextPage && <div className="flex justify-center mt-4 text-muted">Loading more...</div>}
+          {isFetchingNextPage && (
+            <div className="flex justify-center">
+              <LoaderCircle className="animate-spin h-6 w-6 mr-2 text-gray-400" />
+            </div>
+          )}
         </>
       )}
       {!isLoading && allProducts.length <= 0 && <ItemNotFound message="No Results" />}

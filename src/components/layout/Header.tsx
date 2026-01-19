@@ -15,11 +15,11 @@ export default function Header({ showBack = false, backHref = '/', title = 'Stor
   const router = useRouter()
 
   return (
-    <header className="w-full border-b border-border bg-white mb-6 px-6 py-4">
-      <div className="flex items-center max-w-6xl mx-auto">
+    <header className="w-full border-b border-border bg-white mb-6 px-6 py-4 h-16">
+      <div className="flex items-center max-w-6xl mx-auto h-full">
         {showBack ? (
-          <Link href={backHref} className="text-muted text-sm flex items-center gap-2 hover:underline">
-            <ArrowLeft />
+          <Link href={backHref} className="text-gray-500 flex items-center gap-2 hover:underline">
+            <ArrowLeft className="h-5 w-5" />
             <span>{title || 'Back'}</span>
           </Link>
         ) : (
@@ -30,7 +30,7 @@ export default function Header({ showBack = false, backHref = '/', title = 'Stor
             <span role="img" aria-label="store">
               <Logo />
             </span>
-            {title}
+            <span className="uppercase">{title}</span>
           </div>
         )}
       </div>

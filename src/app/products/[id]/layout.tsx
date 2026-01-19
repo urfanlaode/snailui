@@ -7,7 +7,7 @@ interface ProductLayoutProps {
 
 export default function ProductLayout({ children }: ProductLayoutProps) {
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen">
       {/*Main Content*/}
       <div className="flex flex-1 flex-col overflow-hidden">
         {/*Header*/}

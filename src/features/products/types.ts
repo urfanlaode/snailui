@@ -1,3 +1,5 @@
+import { Order } from '@/types'
+
 export interface Product {
   id: number
   title: string
@@ -56,5 +58,5 @@ export interface ProductsParams {
   skip?: number
   select?: string
   sortBy?: string
-  order?: 'asc' | 'desc'
+  order?: Order
 }

@@ -1,12 +1,12 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #fbf9f6;
+  --background: #fcfaf8;
   --surface: #f2f0ec;
   --sidebar: #f5f3ef;
 
   --foreground: #2f2f2f;
-  --muted: #6f6f6f;
+  --muted: #ecebe9;
   --subtle: #9a9a9a;
 
   --primary: #4f6f63;
@@ -22,6 +22,8 @@
   --info: #4a6fa5;
 
   --border: #e6e1da;
+
+  --white: #fdfdfb;
 }
 
 @theme {
@@ -46,6 +48,8 @@
   --color-info: var(--info);
 
   --color-border: var(--border);
+
+  --color-white: var(--white);
 
   --text-xs: 11px;
   --text-sm: 13px;

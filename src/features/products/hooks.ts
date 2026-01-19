@@ -1,4 +1,5 @@
 import { FIVE_MINUTES_MS, TEN_MINUTES_MS } from '@/constants'
+import { SortOrder } from '@/types'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { getCategories, getProduct, getProducts, getProductsByCategory } from './api'
 import { ProductsParams } from './types'
@@ -11,16 +12,15 @@ export function useProducts(params?: ProductsParams) {
   })
 }
 
-export function useInfiniteProducts(category: string, sortOrder: 'asc' | 'desc') {
+export function useInfiniteProducts(category: string, sortOrder?: SortOrder) {
   return useInfiniteQuery({
     queryKey: ['products', 'infinite', category, sortOrder],
     queryFn: ({ pageParam = 0 }) =>
       getProducts({
         skip: pageParam,
-        limit: 30,
-        sortBy: 'price',
-        order: sortOrder,
+        limit: 24,
         category: category || undefined,
+        ...(sortOrder ?? {}),
       }),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {

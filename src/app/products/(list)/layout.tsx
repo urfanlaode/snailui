@@ -1,11 +1,11 @@
 import Header from '@/components/layout/Header'
 import { ReactNode } from 'react'
 
-interface ProductLayoutProps {
+interface ProductsLayoutProps {
   children: ReactNode
 }
 
-export default function ProductLayout({ children }: ProductLayoutProps) {
+export default function ProductsLayout({ children }: ProductsLayoutProps) {
   return (
     <div className="flex h-screen bg-gray-50">
       {/*Main Content*/}

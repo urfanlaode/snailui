@@ -1,8 +1,8 @@
 'use client'
 
-import ItemNotFound from '@/components/ui/ItemNotFound'
-import ProductDetail from '@/components/ui/ProductDetail'
-import ProductDetailSkeleton from '@/components/ui/ProductDetail.skeleton'
+import ItemNotFound from '@/components/ItemNotFound'
+import ProductDetail from '@/components/ProductDetail'
+import ProductDetailSkeleton from '@/components/ProductDetail.skeleton'
 import { useProduct } from '@/features/products/hooks'
 import { use } from 'react'
 
@@ -14,7 +14,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     <div className="max-w-6xl mx-auto">
       {isLoading && <ProductDetailSkeleton />}
       {!isLoading && product && <ProductDetail product={product} />}
-      {!isLoading && !product && <ItemNotFound message="Product Not Found" />}
+      {/*{!isLoading && !product && <ItemNotFound message="Product Not Found" />}*/}
     </div>
   )
 }
